@@ -1,3 +1,4 @@
+//
 #include "SceneBase.h"
 #include "Sound.h"
 
@@ -62,7 +63,7 @@ void SceneBase::Update()
 
 	p_stage->Update();
 
-
+	StateChange();
 }
 
 void SceneBase::Draw()

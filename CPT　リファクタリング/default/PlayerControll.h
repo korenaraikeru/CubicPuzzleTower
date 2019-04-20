@@ -14,10 +14,10 @@ public:
 	void Update();	// 更新
 	void Draw();	// 描画
 
-	const VECTOR& GetPos() const { return m_pos; }
-	void SetFloorPos(VECTOR v) { m_floorPos = v; }
-	bool GetIsGround() { return m_isGround; }
-	void SetIsCanMove(bool flag) { m_isCanMove = flag; }
+	const VECTOR& GetPos() const { return m_pos; }			// ポジションのゲット関数
+	bool GetIsGround() { return m_isGround; }				// 着地フラグのゲット関数
+	void SetFloorPos(VECTOR v) { m_floorPos = v; }			// 床のポジションのセット関数
+	void SetIsCanMove(bool flag) { m_isCanMove = flag; }	// 動けるフラグのセット関数
 
 private:
 	void MovePlayer();						// 移動管理処理
