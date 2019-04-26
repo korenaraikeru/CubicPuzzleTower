@@ -16,11 +16,13 @@ SceneBase::~SceneBase()
 
 void SceneBase::Create()
 {
+	p_characterBase = new CharacterBase();
+	p_characterBase->Create();
+
+	p_objectBase = new ObjectBase();
+	p_objectBase->Create();
+
 	p_camera = new Camera();
-
-	p_player = new PlayerManager();
-
-	p_mapObject = new MapObjectManager();
 
 	p_stage = new StageManager();
 
@@ -29,9 +31,13 @@ void SceneBase::Create()
 
 void SceneBase::Delete()
 {
+	p_characterBase->Delete();
+	delete(p_characterBase);
+
+	p_objectBase->Delete();
+	delete(p_objectBase);
+
 	delete(p_camera);
-	delete(p_player);
-	delete(p_mapObject);
 	delete(p_stage);
 	delete(p_ui);
 	deleteSound();
@@ -43,9 +49,9 @@ void SceneBase::Init()
 
 	InitInput();
 
-	p_player->Init();
+	p_characterBase->Init();
 
-	p_mapObject->Init();
+	p_objectBase->Init();
 
 	p_stage->Init();
 
@@ -58,13 +64,13 @@ void SceneBase::Update()
 {
 	UpdateInput();
 
+	p_characterBase->SetFloorPosToPlayer(p_objectBase->GetFloorPos());
+	p_characterBase->Update();
+
 	p_camera->Update();
 
-	p_player->SetFloorPos(p_mapObject->GetFloorPos());
-	p_player->Update();
-
-	p_mapObject->SetPlayerPos(p_player->GetPlayerPos());
-	p_mapObject->Update();
+	p_objectBase->SetPlayerPosToCube(p_characterBase->GetPlayerPos());
+	p_objectBase->Update();
 
 	p_stage->Update();
 
@@ -72,8 +78,8 @@ void SceneBase::Update()
 
 	for (int i = 0; i < 9; i++)
 	{
-		p_ui->SetMiniMapInfo(i, p_mapObject->GetCubePos(i), p_player->GetPlayerPos(), 
-							 p_mapObject->GetCubeDirPos(), (p_mapObject->GetIsSupport() && !p_mapObject->GetIsClear()));
+		p_ui->SetMiniMapInfo(i, p_objectBase->GetCubePos(i), p_characterBase->GetPlayerPos(),
+							 p_objectBase->GetCubeDirPos(), (p_objectBase->GetCubeIsSupport() && !p_objectBase->GetCubeIsClear()));
 	}
 
 	StateChange();
@@ -83,9 +89,9 @@ void SceneBase::Draw()
 {
 	if (nowScene == PLAY || nowScene == NEXT)
 	{
-		p_player->Draw();
+		p_characterBase->Draw();
 
-		p_mapObject->Draw();
+		p_objectBase->Draw();
 
 		p_ui->Draw();
 
@@ -97,27 +103,27 @@ void SceneBase::StateChange()
 {
 	if (nowScene == PLAY)
 	{
-		if (p_mapObject->GetIsEndRising())
+		if (p_objectBase->GetFloorIsEndRising())
 		{
-			p_player->SetIsCanMove(true);
+			p_characterBase->SetIsCanMoveToPlayer(true);
 
-			if (p_player->GetIsGround())
+			if (p_characterBase->GetPlayerIsGround())
 			{
-				p_mapObject->SetIsCanShot(true);
+				p_objectBase->SetIsCanShotToCube(true);
 			}
 			else
 			{
-				p_mapObject->SetIsCanShot(false);
+				p_objectBase->SetIsCanShotToCube(false);
 			}
 		}
 		else
 		{
-			p_player->SetIsCanMove(false);
+			p_characterBase->SetIsCanMoveToPlayer(false);
 
-			p_mapObject->SetIsCanShot(false);
+			p_objectBase->SetIsCanShotToCube(false);
 		}
 
-		if (p_mapObject->GetIsClear())
+		if (p_objectBase->GetCubeIsClear())
 		{
 			p_stage->SetIsNext(true);
 			nowScene = NEXT;
@@ -127,7 +133,7 @@ void SceneBase::StateChange()
 	{
 		if (p_stage->GetIsChange())
 		{
-			p_player->Init();
+			p_characterBase->Init();
 			p_mapObject->NextStage(p_stage->GetNowStageNum());
 			nowScene = PLAY;
 		}

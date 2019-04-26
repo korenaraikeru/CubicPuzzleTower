@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CharacterBase.cpp" />
     <ClCompile Include="Clear.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -160,6 +161,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="CubeControll.cpp" />
+    <ClCompile Include="FieldObjectControll.cpp" />
     <ClCompile Include="FloorControll.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="GameManager.cpp">
@@ -180,6 +182,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="MiniMapControll.cpp" />
+    <ClCompile Include="ObjectBase.cpp" />
     <ClCompile Include="Player.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -210,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CharacterBase.h" />
     <ClInclude Include="Clear.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -218,6 +222,7 @@
     </ClInclude>
     <ClInclude Include="CubeControll.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="FieldObjectControll.h" />
     <ClInclude Include="FloorControll.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="GameManager.h">
@@ -235,6 +240,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="MiniMapControll.h" />
+    <ClInclude Include="ObjectBase.h" />
     <ClInclude Include="Player.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>

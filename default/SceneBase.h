@@ -1,8 +1,9 @@
 #pragma once
 #include <DxLib.h>
 #include "InputInfo.h"
+#include "CharacterBase.h"
+#include "ObjectBase.h"
 #include "Camera.h"
-#include "PlayerManager.h"
 #include "MapObjectManager.h"
 #include "StageManager.h"
 #include "UIManager.h"
@@ -34,9 +35,10 @@ private:
 
 	SCENE_TYPE nowScene;
 
+	CharacterBase *p_characterBase;
+	ObjectBase *p_objectBase;
+
 	Camera *p_camera;
-	PlayerManager *p_player;
-	MapObjectManager *p_mapObject;
 	StageManager *p_stage;
 	UIManager *p_ui;
 };
