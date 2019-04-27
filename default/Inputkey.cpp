@@ -1,4 +1,4 @@
-#include "Inputkey.h"
+﻿#include "Inputkey.h"
 #include <DxLib.h>
 
 KEY_STATE_ENUM key[256];
@@ -25,11 +25,11 @@ void initKey()
 
 void updateKey()
 {
-    // ���݂̃L�[�ƈ�O�̃t���[���̃L�[��Ԃ����ւ���
+    // 現在のキーと一つ前のフレームのキー状態を入れ替える
     nowKey ^= 1;
     prevKey = nowKey ^ 1;
 
-    // �L�[��Ԏ擾
+    // キー状態取得
     GetHitKeyStateAll(keyState[nowKey]);
 	input = GetJoypadInputState(DX_INPUT_PAD1);
 
@@ -41,23 +41,23 @@ void updateKey()
 
         if (nowInput)
         {
-            //���݉�����Ă���
+            //現在押されている
 
-            //�O�̃t���[����������Ă����H
+            //前のフレームも押されていた？
             if (prevInput)
             {
-                key[i] = KEY_STATE_PRESSED; // ��������ςȂ�
+                key[i] = KEY_STATE_PRESSED; // 押されっぱなし
             }
             else {
-                key[i] = KEY_STATE_PUSHDOWN;// �������ꂽ
+                key[i] = KEY_STATE_PUSHDOWN;// 今押された
             }
 
         }
         else
         {
-            // ���݃L�[�͉�����Ă��Ȃ�
+            // 現在キーは押されていない
 
-            // �O�̃t���[���ŉ�����Ă����H
+            // 前のフレームで押されていた？
             if (prevInput)
             {
                 key[i] = KEY_STATE_PULLUP;

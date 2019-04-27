@@ -153,10 +153,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="CharacterBase.cpp" />
+    <ClCompile Include="PlayerBase.cpp" />
     <ClCompile Include="CubeControll.cpp" />
     <ClCompile Include="FieldObjectManager.cpp" />
-    <ClCompile Include="FloorControll.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="InputInfo.cpp" />
     <ClCompile Include="Inputkey.cpp">
@@ -169,6 +168,7 @@
     <ClCompile Include="ObjectBase.cpp" />
     <ClCompile Include="PlayerControll.cpp" />
     <ClCompile Include="SceneBase.cpp" />
+    <ClCompile Include="SceneControll.cpp" />
     <ClCompile Include="Select.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -191,14 +191,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="CharacterBase.h" />
+    <ClInclude Include="PlayerBase.h" />
     <ClInclude Include="Clear.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="CubeControll.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="FieldObjectManager.h" />
-    <ClInclude Include="FloorControll.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="InputInfo.h" />
     <ClInclude Include="Inputkey.h">
@@ -208,6 +207,7 @@
     <ClInclude Include="ObjectBase.h" />
     <ClInclude Include="PlayerControll.h" />
     <ClInclude Include="SceneBase.h" />
+    <ClInclude Include="SceneControll.h" />
     <ClInclude Include="Select.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>

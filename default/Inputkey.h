@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 typedef enum KEY_STATE_ENUM
 {

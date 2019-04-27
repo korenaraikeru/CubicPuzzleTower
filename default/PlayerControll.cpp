@@ -1,17 +1,17 @@
-//---------------------------------------------------------------
-// ƒvƒŒƒCƒ„[ƒRƒ“ƒgƒ[ƒ‹ƒNƒ‰ƒX
-//---------------------------------------------------------------
+ï»¿//-----------------------------------------------------------------------------
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚¯ãƒ©ã‚¹
+//-----------------------------------------------------------------------------
 #include "PlayerControll.h"
 #include "InputInfo.h"
 #include "Sound.h"
 #include <math.h>
 
-//---------------------
-// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-//---------------------
+//-----------------------------------------------------------------------------
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+//-----------------------------------------------------------------------------
 PlayerControll::PlayerControll()
 {
-	// ‚R‚cƒ‚ƒfƒ‹‚Ì“Ç‚Ýž‚Ý
+	// ï¼“ï¼¤ãƒ¢ãƒ‡ãƒ«ã®èª­ã¿è¾¼ã¿
 	m_modelHandle = MV1LoadModel("data/model/slime.mqo");
 
 	m_pos = VGet(0, 0, 0);
@@ -22,21 +22,21 @@ PlayerControll::PlayerControll()
 	m_shotVec = VGet(0, 0, 0);
 }
 
-//---------------------
-// ƒfƒXƒgƒ‰ƒNƒ^
-//---------------------
+//-----------------------------------------------------------------------------
+// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+//-----------------------------------------------------------------------------
 PlayerControll::~PlayerControll()
 {
-	// ƒ‚ƒfƒ‹‚ÌƒAƒ“ƒ[ƒh.
+	// ãƒ¢ãƒ‡ãƒ«ã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰.
 	MV1DeleteModel(m_modelHandle);
 }
 
-//---------------------
-// ‰Šú‰»
-//---------------------
+//-----------------------------------------------------------------------------
+// åˆæœŸåŒ–
+//-----------------------------------------------------------------------------
 void PlayerControll::Init()
 {
-	// Še•Ï”‰Šú‰»
+	// å„å¤‰æ•°åˆæœŸåŒ–
 	m_pos = VGet(0.f, -150.f, 120.f);
 	m_velocity = VGet(0.f, 0.f, 0.f);
 	m_scale = VGet(1.f, 1.f, 1.f);
@@ -50,7 +50,7 @@ void PlayerControll::Init()
 	m_jumpAccel = 4.f;
 	m_radius = 12.f;
 
-	m_isCanMove = false;
+	m_isAbleMove = false;
 	m_isGround = false;
 	m_isMove = false;
 	m_isJump = false;
@@ -60,96 +60,96 @@ void PlayerControll::Init()
 	m_moveCnt = 0;
 }
 
-//---------------------
-// XV
-//---------------------
+//-----------------------------------------------------------------------------
+// æ›´æ–°
+//-----------------------------------------------------------------------------
 void PlayerControll::Update()
 {
-	// ’…’n
+	// ç€åœ°
 	CheckGround();
 
-	if (m_isCanMove)
+	if (m_isAbleMove)
 	{
-		// ˆÚ“®
+		// ç§»å‹•
 		MovePlayer();
 	}
 }
 
-//---------------------
-// •`‰æ
-//---------------------
+//-----------------------------------------------------------------------------
+// æç”»
+//-----------------------------------------------------------------------------
 void PlayerControll::Draw()
 {
-	// ‚R‚cƒ‚ƒfƒ‹‚Ìƒ|ƒWƒVƒ‡ƒ“Ý’è
+	// ï¼“ï¼¤ãƒ¢ãƒ‡ãƒ«ã®ãƒã‚¸ã‚·ãƒ§ãƒ³è¨­å®š
 	MV1SetPosition(m_modelHandle, m_pos);
 
-	// ‚R‚cƒ‚ƒfƒ‹‚Ì‰ñ“]ŠpÝ’è
+	// ï¼“ï¼¤ãƒ¢ãƒ‡ãƒ«ã®å›žè»¢è§’è¨­å®š
 	MV1SetRotationXYZ(m_modelHandle, VGet(0.0f, m_angleY / 180.0f * DX_PI_F, 0.0f));
 
-	// ‚R‚cƒ‚ƒfƒ‹‚ÌŠg‘å—¦Ý’è
+	// ï¼“ï¼¤ãƒ¢ãƒ‡ãƒ«ã®æ‹¡å¤§çŽ‡è¨­å®š
 	MV1SetScale(m_modelHandle, VGet(m_scale.x, m_scale.y, m_scale.z));
 
-	// ‚R‚cƒ‚ƒfƒ‹‚Ì•`‰æ
+	// ï¼“ï¼¤ãƒ¢ãƒ‡ãƒ«ã®æç”»
 	MV1DrawModel(m_modelHandle);
 
 }
 
-//---------------------
-// ŠÖ”ŒQ
-//---------------------
+//-----------------------------------------------------------------------------
+// é–¢æ•°ç¾¤
+//-----------------------------------------------------------------------------
 
-// ˆÚ“®ŠÇ—ˆ—
+// ç§»å‹•ç®¡ç†å‡¦ç†
 void PlayerControll::MovePlayer()
 {
-	// ƒVƒ‡ƒbƒgƒtƒ‰ƒO‚ªtrue‚È‚çƒVƒ‡ƒbƒgˆ—
+	// ã‚·ãƒ§ãƒƒãƒˆãƒ•ãƒ©ã‚°ãŒtrueãªã‚‰ã‚·ãƒ§ãƒƒãƒˆå‡¦ç†
 	if (m_isShot)
 	{
 		Shot();
 	}
 	else
 	{
-		// ƒXƒeƒBƒbƒN‚â\ŽšƒL[‚Ì“ü—Í‚ª‚ ‚Á‚½‚çˆ—‚É“ü‚é
+		// ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã‚„åå­—ã‚­ãƒ¼ã®å…¥åŠ›ãŒã‚ã£ãŸã‚‰å‡¦ç†ã«å…¥ã‚‹
 		if (GetJoyAxis().x != 0 || GetJoyAxis().y != 0)
 		{
 			m_isMove = true;
 			m_moveCnt++;
 
-			// ˆÚ“®ƒxƒNƒgƒ‹‚ðXV
+			// ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ›´æ–°
 			UpdateVelocity();
 
-			// ‰ñ“]Šp‚ðŒvŽZ
+			// å›žè»¢è§’ã‚’è¨ˆç®—
 			CalculateAngleY(GetJoyAxis().x, -GetJoyAxis().y);
 
-			// ƒ|ƒWƒVƒ‡ƒ“‚ÉˆÚ“®ƒxƒNƒgƒ‹‚ð‰ÁŽZ
+			// ãƒã‚¸ã‚·ãƒ§ãƒ³ã«ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«ã‚’åŠ ç®—
 			m_pos = VAdd(m_pos, m_velocity);
 		}
-		// “ü—Í‚ª‚È‚¢ê‡‚ÍŒü‚«‚ðŒÅ’è‚·‚é
+		// å…¥åŠ›ãŒãªã„å ´åˆã¯å‘ãã‚’å›ºå®šã™ã‚‹
 		else
 		{
 			m_isMove = false;
 			m_moveCnt = 0;
 
-			// Œü‚«ŒÅ’èˆ—
+			// å‘ãå›ºå®šå‡¦ç†
 			FixedDirection();
 		}
 
-		// Šg‘å—¦XV
+		// æ‹¡å¤§çŽ‡æ›´æ–°
 		CangeScale();
 
-		// “–‚½‚è”»’èˆ—
+		// å½“ãŸã‚Šåˆ¤å®šå‡¦ç†
 		DetectionCollision();
 	}
 
-	// ƒVƒ‡ƒbƒg‚Å‚«‚éó‘Ô‚ÅƒVƒ‡ƒbƒgƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚çŒ‚‚Â
-	const bool isCanShot = !m_isMove && !m_isJump && !m_isShot;
-	if (isCanShot && GetInput(SHOT) == PUSHDOWN)
+	// ã‚·ãƒ§ãƒƒãƒˆã§ãã‚‹çŠ¶æ…‹ã§ã‚·ãƒ§ãƒƒãƒˆãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‚‰æ’ƒã¤
+	const bool isAbleShot = !m_isMove && !m_isJump && !m_isShot;
+	if (isAbleShot && GetInput(SHOT) == PUSHDOWN)
 	{
 		m_isShot = true;
 		m_prevPos = m_pos;
 		playSound(SE_SHOT);
 	}
 
-	// ˆÚ“®ƒJƒEƒ“ƒ^‚ª‚Q‚O‚ð’´‚¦‚½‚çƒWƒƒƒ“ƒv‚·‚é
+	// ç§»å‹•ã‚«ã‚¦ãƒ³ã‚¿ãŒï¼’ï¼ã‚’è¶…ãˆãŸã‚‰ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹
 	if (m_moveCnt > 15 && !m_isJump)
 	{
 		m_isJump = true;
@@ -157,14 +157,14 @@ void PlayerControll::MovePlayer()
 		playSound(SE_JUMP);
 	}
 
-	// ƒWƒƒƒ“ƒviˆÚ“®’†ƒI[ƒgƒWƒƒƒ“ƒvj
+	// ã‚¸ãƒ£ãƒ³ãƒ—ï¼ˆç§»å‹•ä¸­ã‚ªãƒ¼ãƒˆã‚¸ãƒ£ãƒ³ãƒ—ï¼‰
 	if (m_isJump)
 	{
 		Jump();
 	}
 }
 
-// ’…’nˆ—
+// ç€åœ°å‡¦ç†
 void PlayerControll::CheckGround()
 {
 
@@ -180,7 +180,7 @@ void PlayerControll::CheckGround()
 	}
 }
 
-// ˆÚ“®ƒxƒNƒgƒ‹XVˆ—
+// ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«æ›´æ–°å‡¦ç†
 void PlayerControll::UpdateVelocity()
 {
 	m_velocity.x = GetJoyAxis().x;
@@ -192,7 +192,7 @@ void PlayerControll::UpdateVelocity()
 	m_velocity = VScale(m_velocity, m_moveSpeed);
 }
 
-// ‰ñ“]ŠpŒvŽZˆ—
+// å›žè»¢è§’è¨ˆç®—å‡¦ç†
 void PlayerControll::CalculateAngleY(float x, float y)
 {
 	VECTOR v = VGet(0, 0, 0);
@@ -205,51 +205,51 @@ void PlayerControll::CalculateAngleY(float x, float y)
 	m_angleY -= 90.f;
 }
 
-// Œü‚«ŒÅ’èˆ—
+// å‘ãå›ºå®šå‡¦ç†
 void PlayerControll::FixedDirection()
 {
-	// Œ»ÝˆÊ’u‚É‰ž‚¶‚ÄŒü‚«‚ðŒÅ’è‚·‚é
-	const bool inBack = m_pos.x > -105 && m_pos.x < 105 && m_pos.z < 0;	// Žè‘O‚É‚¢‚é
-	const bool inFront = m_pos.x > -105 && m_pos.x < 105 && m_pos.z > 0;// ‰œ‚É‚¢‚é
-	const bool inLeft = m_pos.z > -105 && m_pos.z < 105 && m_pos.x < 0; // ¶‚É‚¢‚é
-	const bool inRight = m_pos.z > -105 && m_pos.z < 105 && m_pos.x > 0;// ‰E‚É‚¢‚é
+	// ç¾åœ¨ä½ç½®ã«å¿œã˜ã¦å‘ãã‚’å›ºå®šã™ã‚‹
+	const bool inBack = m_pos.x > -105 && m_pos.x < 105 && m_pos.z < 0;	// æ‰‹å‰ã«ã„ã‚‹
+	const bool inFront = m_pos.x > -105 && m_pos.x < 105 && m_pos.z > 0;// å¥¥ã«ã„ã‚‹
+	const bool inLeft = m_pos.z > -105 && m_pos.z < 105 && m_pos.x < 0; // å·¦ã«ã„ã‚‹
+	const bool inRight = m_pos.z > -105 && m_pos.z < 105 && m_pos.x > 0;// å³ã«ã„ã‚‹
 	if (inFront)
 	{
-		// Žè‘O‚ðŒü‚©‚¹‚ÄAƒVƒ‡ƒbƒgƒxƒNƒgƒ‹‚ðŽè‘OŒü‚«‚É‚·‚é
+		// æ‰‹å‰ã‚’å‘ã‹ã›ã¦ã€ã‚·ãƒ§ãƒƒãƒˆãƒ™ã‚¯ãƒˆãƒ«ã‚’æ‰‹å‰å‘ãã«ã™ã‚‹
 		m_angleY = 0.0f;
 		m_shotVec = VGet(0, 0, -3);
 	}
 	if (inBack)
 	{
-		// ‰œ‚ðŒü‚©‚¹‚ÄAƒVƒ‡ƒbƒgƒxƒNƒgƒ‹‚ð‰œŒü‚«‚É‚·‚é
+		// å¥¥ã‚’å‘ã‹ã›ã¦ã€ã‚·ãƒ§ãƒƒãƒˆãƒ™ã‚¯ãƒˆãƒ«ã‚’å¥¥å‘ãã«ã™ã‚‹
 		m_angleY = 180.0f;
 		m_shotVec = VGet(0, 0, 3);
 	}
 	if (inLeft)
 	{
-		// ‰E‚ðŒü‚©‚¹‚ÄAƒVƒ‡ƒbƒgƒxƒNƒgƒ‹‚ð‰EŒü‚«‚É‚·‚é
+		// å³ã‚’å‘ã‹ã›ã¦ã€ã‚·ãƒ§ãƒƒãƒˆãƒ™ã‚¯ãƒˆãƒ«ã‚’å³å‘ãã«ã™ã‚‹
 		m_angleY = -90.0f;
 		m_shotVec = VGet(3, 0, 0);
 	}
 	if (inRight)
 	{
-		// ¶‚ðŒü‚©‚¹‚ÄAƒVƒ‡ƒbƒgƒxƒNƒgƒ‹‚ð¶Œü‚«‚É‚·‚é
+		// å·¦ã‚’å‘ã‹ã›ã¦ã€ã‚·ãƒ§ãƒƒãƒˆãƒ™ã‚¯ãƒˆãƒ«ã‚’å·¦å‘ãã«ã™ã‚‹
 		m_angleY = 90.0f;
 		m_shotVec = VGet(-3, 0, 0);
 	}
 }
 
-// ƒWƒƒƒ“ƒvˆ—
+// ã‚¸ãƒ£ãƒ³ãƒ—å‡¦ç†
 void PlayerControll::Jump()
 {
 	m_pos.y += m_jumpVec;
 	m_jumpVec -= m_grabity;
 }
 
-// ƒXƒP[ƒ‹‚ð•ÏX‚µ‚Ä‚Õ‚æ‚Õ‚æ‚³‚¹‚éˆ—
+// ã‚¹ã‚±ãƒ¼ãƒ«ã‚’å¤‰æ›´ã—ã¦ã·ã‚ˆã·ã‚ˆã•ã›ã‚‹å‡¦ç†
 void PlayerControll::CangeScale()
 {
-	// ”ñˆÚ“®Žž‚É‚ÍŒ³‚Ì‘å‚«‚³‚É–ß‚·
+	// éžç§»å‹•æ™‚ã«ã¯å…ƒã®å¤§ãã•ã«æˆ»ã™
 	if (!m_isMove && !m_isJump)
 	{
 		if (m_scale.x != 1.f)
@@ -260,7 +260,7 @@ void PlayerControll::CangeScale()
 		}
 	}
 
-	// ˆÚ“®ŽžAƒWƒƒƒ“ƒv‚·‚é‚Ü‚Åk‚ß‚é
+	// ç§»å‹•æ™‚ã€ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹ã¾ã§ç¸®ã‚ã‚‹
 	if (m_isMove && !m_isJump)
 	{
 		m_scale.x += 0.01f;
@@ -268,17 +268,17 @@ void PlayerControll::CangeScale()
 		m_scale.z += 0.01f;
 	}
 
-	// ƒWƒƒƒ“ƒvŽž
+	// ã‚¸ãƒ£ãƒ³ãƒ—æ™‚
 	if (m_isJump)
 	{
-		// ’…’n’¼‘O‚É‘S—Í‚Å’×‚·
+		// ç€åœ°ç›´å‰ã«å…¨åŠ›ã§æ½°ã™
 		if (m_jumpVec < 0 && m_pos.y < m_floorPos.y + 5)
 		{
 			m_scale.x += 0.2f;
 			m_scale.y -= 0.2f;
 			m_scale.z += 0.2f;
 		}
-		// •‚‚¢‚Ä‚¢‚éŠÔA­‚µ‚¸‚ÂŒ³‚É–ß‚·
+		// æµ®ã„ã¦ã„ã‚‹é–“ã€å°‘ã—ãšã¤å…ƒã«æˆ»ã™
 		else if (m_scale.y < 1.f)
 		{
 			m_scale.x -= 0.1f;
@@ -288,10 +288,10 @@ void PlayerControll::CangeScale()
 	}
 }
 
-// ƒVƒ‡ƒbƒgˆ—
+// ã‚·ãƒ§ãƒƒãƒˆå‡¦ç†
 void PlayerControll::Shot()
 {
-	// Œ³‚ÌˆÊ’u‚©‚çŒ»ÝˆÊ’u‚Ì‹——£‚ðŽæ“¾
+	// å…ƒã®ä½ç½®ã‹ã‚‰ç¾åœ¨ä½ç½®ã®è·é›¢ã‚’å–å¾—
 	float length = pow((m_pos.x - m_prevPos.x) * (m_pos.x - m_prevPos.x) +
 					   (m_pos.y - m_prevPos.y) * (m_pos.y - m_prevPos.y) +
 					   (m_pos.z - m_prevPos.z) * (m_pos.z - m_prevPos.z), 0.5);
@@ -299,11 +299,11 @@ void PlayerControll::Shot()
 	if (!m_isReturn && length >= 12.f)
 	{
 		m_isReturn = true;
-		// –ß‚è—pƒxƒNƒgƒ‹‚ÉƒVƒ‡ƒbƒgƒxƒNƒgƒ‹‚Ì”½‘Î•ûŒü‚ÌƒxƒNƒgƒ‹‚ð“ü‚ê‚é
+		// æˆ»ã‚Šç”¨ãƒ™ã‚¯ãƒˆãƒ«ã«ã‚·ãƒ§ãƒƒãƒˆãƒ™ã‚¯ãƒˆãƒ«ã®åå¯¾æ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’å…¥ã‚Œã‚‹
 		m_returnVec = VScale(m_shotVec, -1);
 	}
 
-	// ‹——£‚ª0.1‚æ‚è¬‚³‚­‚È‚Á‚½‚ç
+	// è·é›¢ãŒ0.1ã‚ˆã‚Šå°ã•ããªã£ãŸã‚‰
 	if (m_isReturn && length == 0.f)
 	{
 		m_isShot = false;
@@ -322,10 +322,10 @@ void PlayerControll::Shot()
 	}
 }
 
-// “–‚½‚è”»’è
+// å½“ãŸã‚Šåˆ¤å®š
 void PlayerControll::DetectionCollision()
 {
-	// ƒ}ƒX–Ú‚Ì’†‚É“ü‚ç‚È‚¢‚æ‚¤‚É‚·‚é”»’è
+	// ãƒžã‚¹ç›®ã®ä¸­ã«å…¥ã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹åˆ¤å®š
 	if (m_pos.x - m_radius < 105 && m_pos.x + m_radius > -105)
 	{
 		if (m_pos.z + m_radius > -110 && m_pos.z < 105)
@@ -341,7 +341,7 @@ void PlayerControll::DetectionCollision()
 			m_pos.x = 110 + m_radius;
 	}
 
-	// ‘«ê‚©‚ç—Ž‚¿‚È‚¢‚æ‚¤‚É‚·‚é”»’è
+	// è¶³å ´ã‹ã‚‰è½ã¡ãªã„ã‚ˆã†ã«ã™ã‚‹åˆ¤å®š
 	if (m_pos.x - m_radius < -135)
 		m_pos.x = -135 + m_radius;
 	if (m_pos.x + m_radius > 135)
