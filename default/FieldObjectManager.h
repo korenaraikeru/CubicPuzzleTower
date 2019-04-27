@@ -1,11 +1,11 @@
 #pragma once
 #include "DxLib.h"
 
-class FieldObjectControll
+class FieldObjectManager
 {
 public:
-	FieldObjectControll();
-	~FieldObjectControll();
+	FieldObjectManager();
+	~FieldObjectManager();
 
 	//---éÂóvä÷êî-----------------------------------
 	void Init();

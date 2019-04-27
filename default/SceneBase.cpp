@@ -134,7 +134,7 @@ void SceneBase::StateChange()
 		if (p_stage->GetIsChange())
 		{
 			p_characterBase->Init();
-			p_mapObject->NextStage(p_stage->GetNowStageNum());
+			p_objectBase->NextStage(p_stage->GetNowStageNum());
 			nowScene = PLAY;
 		}
 	}

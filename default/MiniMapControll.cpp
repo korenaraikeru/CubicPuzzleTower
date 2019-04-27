@@ -39,7 +39,7 @@ void MiniMapControll::Draw()
 	DrawGraph(m_framePos.x - 95, m_framePos.y - 95, m_graphMap, TRUE);
 	DrawGraph(m_framePos.x, m_framePos.y, m_graphFrame, TRUE);
 
-	if (m_isSupport)
+	if (m_isSupport && m_playerPos.y > -2)
 	{
 		if (m_playerPos.x < 105 && m_playerPos.x > -105)
 		{

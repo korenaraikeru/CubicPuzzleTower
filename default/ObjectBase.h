@@ -1,6 +1,6 @@
 #pragma once
 #include "CubeControll.h"
-#include "FieldObjectControll.h"
+#include "FieldObjectManager.h"
 
 class ObjectBase
 {
@@ -35,7 +35,7 @@ public:
 
 private:
 	CubeControll *p_cube;
-	FieldObjectControll *p_fieldObject;
+	FieldObjectManager *p_fieldObject;
 
 };
 

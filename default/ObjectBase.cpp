@@ -12,7 +12,7 @@ ObjectBase::~ObjectBase()
 void ObjectBase::Create()
 {
 	p_cube = new CubeControll();
-	p_fieldObject = new FieldObjectControll();
+	p_fieldObject = new FieldObjectManager();
 }
 
 void ObjectBase::Delete()
@@ -31,6 +31,11 @@ void ObjectBase::Update()
 {
 	p_cube->Update();
 	p_fieldObject->Update();
+
+	if (p_cube->GetIsClear())
+	{
+		p_fieldObject->SetIsRising(true);
+	}
 }
 
 void ObjectBase::Draw()

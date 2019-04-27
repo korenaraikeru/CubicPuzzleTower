@@ -113,7 +113,7 @@ void CubeControll::Draw()
 		MV1DrawModel(m_modelHandle);
 	}
 
-	if (!m_isClear && m_isSupport)
+	if (!m_isClear && m_isSupport && m_playerPos.y > -2)
 	{
 		for (int i = 0; i < 28; i++)
 		{

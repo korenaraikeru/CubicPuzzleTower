@@ -1,7 +1,7 @@
-#include "FieldObjectControll.h"
+#include "FieldObjectManager.h"
 #include "Sound.h"
 
-FieldObjectControll::FieldObjectControll()
+FieldObjectManager::FieldObjectManager()
 {
 	m_modelHandleFloor = MV1LoadModel("data/model/scaffold.mqo");	//床
 	m_modelHandleFrame = MV1LoadModel("data/model/frame.mqo");		//枠
@@ -9,14 +9,14 @@ FieldObjectControll::FieldObjectControll()
 }
 
 
-FieldObjectControll::~FieldObjectControll()
+FieldObjectManager::~FieldObjectManager()
 {
 	MV1DeleteModel(m_modelHandleFloor);
 	MV1DeleteModel(m_modelHandleFrame);
 	MV1DeleteModel(m_modelHandleTower);
 }
 
-void FieldObjectControll::Init()
+void FieldObjectManager::Init()
 {
 	m_floorPos = VGet(0.f, -150.f, 0.f);
 
@@ -24,12 +24,12 @@ void FieldObjectControll::Init()
 	m_isEndRising = false;
 }
 
-void FieldObjectControll::Update()
+void FieldObjectManager::Update()
 {
 	MoveFloor();
 }
 
-void FieldObjectControll::Draw()
+void FieldObjectManager::Draw()
 {
 	// ３Dモデルのポジション設定
 	MV1SetPosition(m_modelHandleFloor, m_floorPos);
@@ -42,7 +42,7 @@ void FieldObjectControll::Draw()
 	MV1DrawModel(m_modelHandleFrame);
 }
 
-void FieldObjectControll::MoveFloor()
+void FieldObjectManager::MoveFloor()
 {
 	// 床が動いている間、効果音再生
 	if (m_floorPos.y != 0)
