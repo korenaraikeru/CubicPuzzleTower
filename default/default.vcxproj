@@ -165,11 +165,9 @@
     <ClCompile Include="main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="MapObjectManager.cpp" />
     <ClCompile Include="MiniMapControll.cpp" />
     <ClCompile Include="ObjectBase.cpp" />
     <ClCompile Include="PlayerControll.cpp" />
-    <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="Select.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -188,7 +186,8 @@
     <ClCompile Include="UI.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="UIControll.cpp" />
+    <ClCompile Include="UIBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
@@ -205,11 +204,9 @@
     <ClInclude Include="Inputkey.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="MapObjectManager.h" />
     <ClInclude Include="MiniMapControll.h" />
     <ClInclude Include="ObjectBase.h" />
     <ClInclude Include="PlayerControll.h" />
-    <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="Select.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -228,7 +225,8 @@
     <ClInclude Include="UI.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="UIManager.h" />
+    <ClInclude Include="UIControll.h" />
+    <ClInclude Include="UIBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

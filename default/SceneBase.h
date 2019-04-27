@@ -1,22 +1,12 @@
 #pragma once
 #include <DxLib.h>
+#include "Define.h"
 #include "InputInfo.h"
 #include "CharacterBase.h"
 #include "ObjectBase.h"
 #include "Camera.h"
-#include "MapObjectManager.h"
 #include "StageManager.h"
-#include "UIManager.h"
-
-typedef enum SCENE_TYPE
-{
-	TITLE,
-	SELECT,
-	PLAY,
-	NEXT,
-	PAUSE,
-	CLEAR,
-}SCENE_TYPE;
+#include "UIBase.h"
 
 class SceneBase
 {
@@ -33,13 +23,13 @@ public:
 private:
 	void StateChange();
 
-	SCENE_TYPE nowScene;
+	SCENE_TYPE m_nowScene;
 
 	CharacterBase *p_characterBase;
 	ObjectBase *p_objectBase;
 
 	Camera *p_camera;
 	StageManager *p_stage;
-	UIManager *p_ui;
+	UIBase *p_ui;
 };
 

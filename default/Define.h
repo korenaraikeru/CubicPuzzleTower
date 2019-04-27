@@ -5,27 +5,15 @@
 
 #define VECTOR_SCALING 0.70710678118f //Î‚ßˆÚ“®ŒW”
 
-typedef enum GAME_STATE
+typedef enum SCENE_TYPE
 {
 	TITLE,
 	SELECT,
 	PLAY,
+	NEXT,
 	PAUSE,
 	CLEAR,
-	GAMEOVER
-}GAME_STATE;
-
-enum DIR	//Œü‚«
-{
-	dir_left,
-	dir_right,
-	dir_front,
-	dir_back,
-	dir_f_left,
-	dir_f_right,
-	dir_b_left,
-	dir_b_right
-};
+}SCENE_TYPE;
 
 enum LEVEL
 {

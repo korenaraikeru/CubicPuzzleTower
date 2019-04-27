@@ -26,7 +26,8 @@ void SceneBase::Create()
 
 	p_stage = new StageManager();
 
-	p_ui = new UIManager();
+	p_ui = new UIBase();
+	p_ui->Create();
 }
 
 void SceneBase::Delete()
@@ -45,7 +46,7 @@ void SceneBase::Delete()
 
 void SceneBase::Init()
 {
-	nowScene = PLAY;
+	m_nowScene = TITLE;
 
 	InitInput();
 
@@ -64,22 +65,31 @@ void SceneBase::Update()
 {
 	UpdateInput();
 
-	p_characterBase->SetFloorPosToPlayer(p_objectBase->GetFloorPos());
-	p_characterBase->Update();
-
-	p_camera->Update();
-
-	p_objectBase->SetPlayerPosToCube(p_characterBase->GetPlayerPos());
-	p_objectBase->Update();
-
-	p_stage->Update();
-
-	p_ui->Update();
-
-	for (int i = 0; i < 9; i++)
+	if (m_nowScene == TITLE)
 	{
-		p_ui->SetMiniMapInfo(i, p_objectBase->GetCubePos(i), p_characterBase->GetPlayerPos(),
-							 p_objectBase->GetCubeDirPos(), (p_objectBase->GetCubeIsSupport() && !p_objectBase->GetCubeIsClear()));
+		p_ui->SetNowScene(m_nowScene);
+		p_ui->Update();
+	}
+	else if (m_nowScene == PLAY || m_nowScene == NEXT)
+	{
+		p_characterBase->SetFloorPosToPlayer(p_objectBase->GetFloorPos());
+		p_characterBase->Update();
+
+		p_camera->Update();
+
+		p_objectBase->SetPlayerPosToCube(p_characterBase->GetPlayerPos());
+		p_objectBase->Update();
+
+		p_stage->Update();
+
+		for (int i = 0; i < 9; i++)
+		{
+			p_ui->SetMiniMapInfo(i, p_objectBase->GetCubePos(i), p_characterBase->GetPlayerPos(),
+				p_objectBase->GetCubeDirPos(), (p_objectBase->GetCubeIsSupport() && !p_objectBase->GetCubeIsClear()));
+		}
+
+		p_ui->SetNowScene(m_nowScene);
+		p_ui->Update();
 	}
 
 	StateChange();
@@ -87,7 +97,11 @@ void SceneBase::Update()
 
 void SceneBase::Draw()
 {
-	if (nowScene == PLAY || nowScene == NEXT)
+	if (m_nowScene == TITLE)
+	{
+		p_ui->Draw();
+	}
+	else if (m_nowScene == PLAY || m_nowScene == NEXT)
 	{
 		p_characterBase->Draw();
 
@@ -96,12 +110,21 @@ void SceneBase::Draw()
 		p_ui->Draw();
 
 		p_stage->Draw();
+
+		p_ui->Draw();
 	}
 }
 
 void SceneBase::StateChange()
 {
-	if (nowScene == PLAY)
+	if (m_nowScene == TITLE)
+	{
+		if (GetInput(START))
+		{
+			m_nowScene = PLAY;
+		}
+	}
+	else if (m_nowScene == PLAY)
 	{
 		if (p_objectBase->GetFloorIsEndRising())
 		{
@@ -126,16 +149,16 @@ void SceneBase::StateChange()
 		if (p_objectBase->GetCubeIsClear())
 		{
 			p_stage->SetIsNext(true);
-			nowScene = NEXT;
+			m_nowScene = NEXT;
 		}
 	}
-	if (nowScene == NEXT)
+	else if (m_nowScene == NEXT)
 	{
 		if (p_stage->GetIsChange())
 		{
 			p_characterBase->Init();
 			p_objectBase->NextStage(p_stage->GetNowStageNum());
-			nowScene = PLAY;
+			m_nowScene = PLAY;
 		}
 	}
 }

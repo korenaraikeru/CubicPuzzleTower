@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include "SceneBase.h"
 #include "FPS.h"
+#include "Define.h"
 
 //-----------------------------------------------------------------------------
 // メイン関数.
@@ -16,12 +17,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	}
 
 	// 画面モードのセット
-	SetGraphMode(1920, 1080, 16);
+	SetGraphMode(SCREEN_W, SCREEN_H, 16);
 	ChangeWindowMode(FALSE);
 
 	// シーンベースを生成
 	SceneBase *scene = new SceneBase();
-
+	
 	// フレームレート固定クラスを生成
 	FPS fps;
 	bool isFixedFPS = true;
