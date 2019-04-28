@@ -1,9 +1,10 @@
-//------------------------------
-// ‰¹ŠÖ˜AŠÖ”ŒQ
+ï»¿//------------------------------
+// éŸ³é–¢é€£é–¢æ•°ç¾¤
 //------------------------------
 #pragma once
 #define ALL_NUM 14
 
+// éŸ³ã®ç¨®é¡
 typedef enum SOUND_NUM
 {
 	BGM_TITLE,
@@ -22,8 +23,8 @@ typedef enum SOUND_NUM
 	SE_CLEAR
 }SOUND_NUM;
 
-void loadSound();					// “Ç‚İ‚İ
-void deleteSound();					// íœ
-void playSound(int sound_name);		// Ä¶
-void stopSound(int sound_name);		// ’â~
-void resetSound(int sound_name);	// Ä¶ˆÊ’u‰Šú‰»
+void loadSound();					// èª­ã¿è¾¼ã¿
+void deleteSound();					// å‰Šé™¤
+void playSound(int sound_name);		// å†ç”Ÿ
+void stopSound(int sound_name);		// åœæ­¢
+void resetSound(int sound_name);	// å†ç”Ÿä½ç½®åˆæœŸåŒ–

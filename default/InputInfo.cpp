@@ -1,12 +1,18 @@
+﻿//-----------------------------------------------------------------------------
+// 入力情報管理関数
+//-----------------------------------------------------------------------------
 #include "InputInfo.h"
 #include "DxLib.h"
 
 INPUT_STATE_ENUM input[INPUT_NUM];
-unsigned char padNum[INPUT_NUM];
-unsigned char keyNum[INPUT_NUM];
+unsigned char padNum[INPUT_NUM];	// ゲームパッドの入力情報
+unsigned char keyNum[INPUT_NUM];	// キーボードの入力情報
 
-int joyX, joyY;
+int joyX, joyY;						// スティックの入力情報
 
+//-----------------------------------------------------------------------------
+// 初期化
+//-----------------------------------------------------------------------------
 void InitInput()
 {
 	for (int i = 0; i < INPUT_NUM; i++)
@@ -35,6 +41,9 @@ void InitInput()
 	joyY = 0;
 }
 
+//-----------------------------------------------------------------------------
+// 更新
+//-----------------------------------------------------------------------------
 void UpdateInput()
 {
 	int nowInput = GetJoypadInputState(DX_INPUT_PAD1);
@@ -85,6 +94,9 @@ void UpdateInput()
 	}
 }
 
+//-----------------------------------------------------------------------------
+// Get関数
+//-----------------------------------------------------------------------------
 INPUT_STATE_ENUM GetInput(INPUT_NAME_ENUM name)
 {
 	return input[name];
