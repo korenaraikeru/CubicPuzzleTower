@@ -1,5 +1,5 @@
-//---------------------------------------------------------------
-// ƒvƒŒƒCƒ„[ƒRƒ“ƒgƒ[ƒ‹ƒNƒ‰ƒX
+ï»¿//---------------------------------------------------------------
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚¯ãƒ©ã‚¹
 //---------------------------------------------------------------
 #pragma once
 #include "DxLib.h"
@@ -7,53 +7,64 @@
 class PlayerControll
 {
 public:
-	PlayerControll();
-	~PlayerControll();
+	PlayerControll();	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	~PlayerControll();	// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
-	void Init();	// ‰Šú‰»
-	void Update();	// XV
-	void Draw();	// •`‰æ
+	//---ä¸»è¦é–¢æ•°-------------------------------------------------------------------
+	void Init();		// åˆæœŸåŒ–
+	void Update();		// æ›´æ–°
+	void Draw();		// æç”»
+	//-----------------------------------------------------------------------------
 
-	const VECTOR& GetPos() const { return m_pos; }			// ƒ|ƒWƒVƒ‡ƒ“‚ÌƒQƒbƒgŠÖ”
-	bool GetIsGround() { return m_isGround; }				// ’…’nƒtƒ‰ƒO‚ÌƒQƒbƒgŠÖ”
-	void SetFloorPos(VECTOR v) { m_floorPos = v; }			// °‚Ìƒ|ƒWƒVƒ‡ƒ“‚ÌƒZƒbƒgŠÖ”
-	void SetIsCanMove(bool flag) { m_isCanMove = flag; }	// “®‚¯‚éƒtƒ‰ƒO‚ÌƒZƒbƒgŠÖ”
+	//---Geté–¢æ•°--------------------------------------------------------------------
+	const VECTOR& GetPos() const { return m_pos; }			// ãƒã‚¸ã‚·ãƒ§ãƒ³ã®ã‚²ãƒƒãƒˆé–¢æ•°
+	bool GetIsGround() { return m_isGround; }				// ç€åœ°ãƒ•ãƒ©ã‚°ã®ã‚²ãƒƒãƒˆé–¢æ•°
+	//------------------------------------------------------------------------------
+	
+	//---Seté–¢æ•°---------------------------------------------------------------------
+	void SetFloorPos(VECTOR v) { m_floorPos = v; }			// åºŠã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã®ã‚»ãƒƒãƒˆé–¢æ•°
+	void SetIsAbleMove(bool flag) { m_isAbleMove = flag; }	// å‹•ã‘ã‚‹ãƒ•ãƒ©ã‚°ã®ã‚»ãƒƒãƒˆé–¢æ•°
+	//------------------------------------------------------------------------------
 
 private:
-	void MovePlayer();						// ˆÚ“®ŠÇ—ˆ—
-	void CheckGround();						// ’…’nˆ—
-	void UpdateVelocity();					// ˆÚ“®ƒxƒNƒgƒ‹XVˆ—
-	void CalculateAngleY(float x, float y);	// ‰ñ“]ŠpŒvZˆ—
-	void FixedDirection();					// Œü‚«ŒÅ’èˆ—
-	void Jump();							// ƒWƒƒƒ“ƒvˆ—
-	void CangeScale();						// ƒXƒP[ƒ‹‚ğ•ÏX‚µ‚Ä‚Õ‚æ‚Õ‚æ‚³‚¹‚éˆ—
-	void Shot();							// ƒVƒ‡ƒbƒgˆ—
-	void DetectionCollision();				// “–‚½‚è”»’è
+	//---é–¢æ•°ç¾¤----------------------------------------------------------------------
+	void MovePlayer();						// ç§»å‹•ç®¡ç†å‡¦ç†
+	void CheckGround();						// ç€åœ°å‡¦ç†
+	void UpdateVelocity();					// ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«æ›´æ–°å‡¦ç†
+	void CalculateAngleY(float x, float y);	// å›è»¢è§’è¨ˆç®—å‡¦ç†
+	void FixedDirection();					// å‘ãå›ºå®šå‡¦ç†
+	void Jump();							// ã‚¸ãƒ£ãƒ³ãƒ—å‡¦ç†
+	void CangeScale();						// ã‚¹ã‚±ãƒ¼ãƒ«ã‚’å¤‰æ›´ã—ã¦ã·ã‚ˆã·ã‚ˆã•ã›ã‚‹å‡¦ç†
+	void Shot();							// ã‚·ãƒ§ãƒƒãƒˆå‡¦ç†
+	void DetectionCollision();				// å½“ãŸã‚Šåˆ¤å®š
+	//------------------------------------------------------------------------------
 
-	int m_modelHandle;	// ƒ‚ƒfƒ‹ƒnƒ“ƒhƒ‹
+	//---å¤‰æ•°ç¾¤----------------------------------------------------------------------
+	int m_modelHandle;	// ãƒ¢ãƒ‡ãƒ«ãƒãƒ³ãƒ‰ãƒ«
 
-	VECTOR m_pos;		// ƒ|ƒWƒVƒ‡ƒ“
-	VECTOR m_velocity;	// ˆÚ“®ƒxƒNƒgƒ‹
-	VECTOR m_scale;		// Šg‘å—¦
-	VECTOR m_floorPos;	// °‚Ìƒ|ƒWƒVƒ‡ƒ“
-	VECTOR m_prevPos;	// Œ³‚Ìƒ|ƒWƒVƒ‡ƒ“iƒVƒ‡ƒbƒgg—pj
-	VECTOR m_shotVec;	// ƒVƒ‡ƒbƒg‚ÌƒxƒNƒgƒ‹
-	VECTOR m_returnVec;	// ƒVƒ‡ƒbƒg‚Ì–ß‚è—pƒxƒNƒgƒ‹
+	VECTOR m_pos;		// ãƒã‚¸ã‚·ãƒ§ãƒ³
+	VECTOR m_velocity;	// ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«
+	VECTOR m_scale;		// æ‹¡å¤§ç‡
+	VECTOR m_floorPos;	// åºŠã®ãƒã‚¸ã‚·ãƒ§ãƒ³
+	VECTOR m_prevPos;	// å…ƒã®ãƒã‚¸ã‚·ãƒ§ãƒ³ï¼ˆã‚·ãƒ§ãƒƒãƒˆæ™‚ä½¿ç”¨ï¼‰
+	VECTOR m_shotVec;	// ã‚·ãƒ§ãƒƒãƒˆæ™‚ã®ãƒ™ã‚¯ãƒˆãƒ«
+	VECTOR m_returnVec;	// ã‚·ãƒ§ãƒƒãƒˆæ™‚ã®æˆ»ã‚Šç”¨ãƒ™ã‚¯ãƒˆãƒ«
 
-	float m_angleY;		// Y²‚Ì‰ñ“]Šp“x
-	float m_moveSpeed;	// ˆÚ“®‘¬“x
-	float m_grabity;	// d—Í
-	float m_jumpAccel;	// ƒWƒƒƒ“ƒv‚Ì‰‘¬
-	float m_jumpVec;	// ƒWƒƒƒ“ƒv‚ÌÀ•WXV—p•Ï”
-	float m_radius;		// ƒ‚ƒfƒ‹‚Ì”¼Œa
+	float m_angleY;		// Yè»¸ã®å›è»¢è§’åº¦
+	float m_moveSpeed;	// ç§»å‹•é€Ÿåº¦
+	float m_grabity;	// é‡åŠ›
+	float m_jumpAccel;	// ã‚¸ãƒ£ãƒ³ãƒ—ã®åˆé€Ÿ
+	float m_jumpVec;	// ã‚¸ãƒ£ãƒ³ãƒ—æ™‚ã®åº§æ¨™æ›´æ–°ç”¨å¤‰æ•°
+	float m_radius;		// ãƒ¢ãƒ‡ãƒ«ã®åŠå¾„
 
-	bool m_isCanMove;
-	bool m_isGround;	// ’…’nƒtƒ‰ƒO
-	bool m_isMove;		// ˆÚ“®’†ƒtƒ‰ƒO
-	bool m_isJump;		// ƒWƒƒƒ“ƒvƒtƒ‰ƒO
-	bool m_isShot;		// ƒVƒ‡ƒbƒgƒtƒ‰ƒO
-	bool m_isReturn;	// ƒVƒ‡ƒbƒg‚ÉŒ³‚ÌˆÊ’u‚É–ß‚é‚½‚ß‚Ìƒtƒ‰ƒO
+	bool m_isAbleMove;
+	bool m_isGround;	// ç€åœ°ãƒ•ãƒ©ã‚°
+	bool m_isMove;		// ç§»å‹•ä¸­ãƒ•ãƒ©ã‚°
+	bool m_isJump;		// ã‚¸ãƒ£ãƒ³ãƒ—ãƒ•ãƒ©ã‚°
+	bool m_isShot;		// ã‚·ãƒ§ãƒƒãƒˆãƒ•ãƒ©ã‚°
+	bool m_isReturn;	// ã‚·ãƒ§ãƒƒãƒˆæ™‚ã«å…ƒã®ä½ç½®ã«æˆ»ã‚‹ãŸã‚ã®ãƒ•ãƒ©ã‚°
 
-	int m_moveCnt;		// ˆÚ“®’†‚ÌƒJƒEƒ“ƒ^
+	int m_moveCnt;		// ç§»å‹•ä¸­ã®ã‚«ã‚¦ãƒ³ã‚¿
+	//------------------------------------------------------------------------------
 };
 
