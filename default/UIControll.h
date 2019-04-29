@@ -1,6 +1,3 @@
-﻿//-----------------------------------------------------------------------------
-// UIコントロールクラス
-//-----------------------------------------------------------------------------
 #pragma once
 #include "DxLib.h"
 #include "Define.h"
@@ -10,17 +7,14 @@ class UIControll
 public:
 	UIControll();
 	~UIControll();
-	
-	//---主要関数-------------------------------------------------------------------
+
 	void Init();
 	void UpdateTitle();
 	void DrawTitle();
-	//-----------------------------------------------------------------------------
 
 private:
-	void BlinkGraph(float interval);		// 点滅処理
+	void BlinkGraph(float interval);
 
-	//---変数群----------------------------------------------------------------------
 	int m_graphTitle;
 	int m_graphStart;
 	int m_graphFloorNum[12];
@@ -36,6 +30,5 @@ private:
 	bool m_isBlink;
 
 	SCENE_TYPE m_nowScene;
-	//-----------------------------------------------------------------------------
 };
 

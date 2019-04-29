@@ -1,6 +1,3 @@
-﻿//-----------------------------------------------------------------------------
-// オブジェクトベースクラス
-//-----------------------------------------------------------------------------
 #pragma once
 #include "CubeControll.h"
 #include "FieldObjectManager.h"
@@ -8,34 +5,33 @@
 class ObjectBase
 {
 public:
-	ObjectBase();		// コンストラクタ
-	~ObjectBase();		// デストラクタ
+	ObjectBase();
+	~ObjectBase();
 
-	//---主要関数-------------------------------------------------------------------
-	void Create();		// 生成
-	void Delete();		// 削除
-	void Init();		// 初期化
-	void Update();		// 更新
-	void Draw();		// 描画
-	//-----------------------------------------------------------------------------
-
+	//---��v�֐�-----------------------------------
+	void Create();
+	void Delete();
+	void Init();
+	void Update();
+	void Draw();
+	//---------------------------------------------
 	
-	//---Get関数--------------------------------------------------------------------
+	//---Get�֐�-----------------------------------
 	VECTOR GetCubePos(int i) { return p_cube->GetPos(i); }
 	VECTOR GetCubeDirPos() { return p_cube->GetDirPos(); }
 	VECTOR GetFloorPos() { return p_fieldObject->GetFloorPos(); }
 	bool GetCubeIsSupport() { return p_cube->GetIsSupport(); }
 	bool GetCubeIsClear() { return p_cube->GetIsClear(); }
-	bool GetIsFloorRisingEnd() { return p_fieldObject->GetIsEndRising(); }
-	//------------------------------------------------------------------------------
+	bool GetFloorIsEndRising() { return p_fieldObject->GetIsEndRising(); }
+	//---------------------------------------------
 
-	//---Set関数---------------------------------------------------------------------
+	//---Set�֐�-----------------------------------
 	void SetPlayerPosToCube(VECTOR v) { p_cube->SetPlayerPos(v); }
-	void SetIsAbleShotToCube(bool flag) { p_cube->SetIsAbleShot(flag); }
-	void SetIsRising(bool flag) { p_fieldObject->SetIsRising(flag); }
-	//------------------------------------------------------------------------------
-
-	void ChangeToNextStage(int n);		// 次のステージへ行く際の変更処理
+	void SetIsCanShotToCube(bool flag) { p_cube->SetIsCanShot(flag); }
+	void SetFloorIsRising(bool flag) { p_fieldObject->SetIsRising(flag); }
+	//---------------------------------------------
+	
+	void NextStage(int n);
 
 private:
 	CubeControll *p_cube;

@@ -1,68 +1,50 @@
-ï»¿//-----------------------------------------------------------------------------
-// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç®¡ç†ã‚¯ãƒ©ã‚¹
-//-----------------------------------------------------------------------------
 #include "FieldObjectManager.h"
 #include "Sound.h"
 
-//-----------------------------------------------------------------------------
-// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
-//-----------------------------------------------------------------------------
 FieldObjectManager::FieldObjectManager()
 {
-	m_modelHandleFloor = MV1LoadModel("data/model/scaffold.mqo");	//åºŠ
-	m_modelHandleGrid = MV1LoadModel("data/model/frame.mqo");		//æž 
-	m_modelHandleTower = MV1LoadModel("data/model/tower.x");		//ã‚¿ãƒ¯ãƒ¼
+	m_modelHandleFloor = MV1LoadModel("data/model/scaffold.mqo");	//°
+	m_modelHandleFrame = MV1LoadModel("data/model/frame.mqo");		//˜g
+	m_modelHandleTower = MV1LoadModel("data/model/tower.x");		//ƒ^ƒ[
 }
 
-//-----------------------------------------------------------------------------
-// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
-//-----------------------------------------------------------------------------
+
 FieldObjectManager::~FieldObjectManager()
 {
 	MV1DeleteModel(m_modelHandleFloor);
-	MV1DeleteModel(m_modelHandleGrid);
+	MV1DeleteModel(m_modelHandleFrame);
 	MV1DeleteModel(m_modelHandleTower);
 }
 
-//-----------------------------------------------------------------------------
-// åˆæœŸåŒ–
-//-----------------------------------------------------------------------------
 void FieldObjectManager::Init()
 {
 	m_floorPos = VGet(0.f, -150.f, 0.f);
 
 	m_isRising = false;
-	m_isRisingEnd = false;
+	m_isEndRising = false;
 }
 
-//-----------------------------------------------------------------------------
-// æ›´æ–°
-//-----------------------------------------------------------------------------
 void FieldObjectManager::Update()
 {
 	MoveFloor();
 }
 
-//-----------------------------------------------------------------------------
-// æç”»
-//-----------------------------------------------------------------------------
 void FieldObjectManager::Draw()
 {
-	// ï¼“Dãƒ¢ãƒ‡ãƒ«ã®ãƒã‚¸ã‚·ãƒ§ãƒ³è¨­å®š
+	// ‚RDƒ‚ƒfƒ‹‚Ìƒ|ƒWƒVƒ‡ƒ“Ý’è
 	MV1SetPosition(m_modelHandleFloor, m_floorPos);
 	MV1SetPosition(m_modelHandleTower, VGet(0, 0, 0));
-	MV1SetPosition(m_modelHandleGrid, VGet(0, 0, 0));
+	MV1SetPosition(m_modelHandleFrame, VGet(0, 0, 0));
 
-	// ï¼“ï¼¤ãƒ¢ãƒ‡ãƒ«ã®æç”»
+	// ‚R‚cƒ‚ƒfƒ‹‚Ì•`‰æ
 	MV1DrawModel(m_modelHandleFloor);
 	MV1DrawModel(m_modelHandleTower);
-	MV1DrawModel(m_modelHandleGrid);
+	MV1DrawModel(m_modelHandleFrame);
 }
 
-// åºŠã®ä¸Šæ˜‡
 void FieldObjectManager::MoveFloor()
 {
-	// åºŠãŒå‹•ã„ã¦ã„ã‚‹é–“ã€åŠ¹æžœéŸ³å†ç”Ÿ
+	// °‚ª“®‚¢‚Ä‚¢‚éŠÔAŒø‰Ê‰¹Ä¶
 	if (m_floorPos.y != 0)
 	{
 		playSound(SE_SCAF);
@@ -76,11 +58,11 @@ void FieldObjectManager::MoveFloor()
 	if (m_floorPos.y >= 0 && !m_isRising)
 	{
 		m_floorPos.y = 0.f;
-		m_isRisingEnd = true;
+		m_isEndRising = true;
 	}
 	else
 	{
 		m_floorPos.y += 2.f;
-		m_isRisingEnd = false;
+		m_isEndRising = false;
 	}
 }

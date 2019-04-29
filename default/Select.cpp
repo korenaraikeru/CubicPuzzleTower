@@ -1,4 +1,4 @@
-﻿#include "Select.h"
+#include "Select.h"
 #include "Inputkey.h"
 #include "Define.h"
 #include "Sound.h"

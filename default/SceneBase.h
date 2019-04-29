@@ -1,33 +1,35 @@
-﻿//-----------------------------------------------------------------------------
-// シーンベースクラス
-//-----------------------------------------------------------------------------
 #pragma once
 #include <DxLib.h>
 #include "Define.h"
 #include "InputInfo.h"
-#include "PlayerBase.h"
+#include "CharacterBase.h"
 #include "ObjectBase.h"
 #include "Camera.h"
 #include "StageManager.h"
 #include "UIBase.h"
 
-#include "SceneControll.h"
-
 class SceneBase
 {
 public:
-	SceneBase();		// コンストラクタ
-	~SceneBase();		// デストラクタ
+	SceneBase();
+	~SceneBase();
 
-	//---主要関数-------------------------------------------------------------------
-	void Init();		// 初期化
-	void Update();		// 更新
-	void Draw();		// 描画
-	//-----------------------------------------------------------------------------
+	void Create();
+	void Delete();
+	void Init();
+	void Update();
+	void Draw();
 
 private:
-	SceneControll *p_sceneControll;
-	
-	SCENE_TYPE m_nowScene;			// 現在のシーン
+	void StateChange();
+
+	SCENE_TYPE m_nowScene;
+
+	CharacterBase *p_characterBase;
+	ObjectBase *p_objectBase;
+
+	Camera *p_camera;
+	StageManager *p_stage;
+	UIBase *p_ui;
 };
 

@@ -1,16 +1,16 @@
-ï»¿//---------------------------------------------------------------
-// ã‚­ãƒ¥ãƒ¼ãƒ–ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚¯ãƒ©ã‚¹
+//---------------------------------------------------------------
+// ƒLƒ…[ƒuƒRƒ“ƒgƒ[ƒ‹ƒNƒ‰ƒX
 //---------------------------------------------------------------
 #include "CubeControll.h"
 #include "InputInfo.h"
 #include "Sound.h"
 
 //---------------------
-// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 //---------------------
 CubeControll::CubeControll()
 {
-	// ï¼“ï¼¤ãƒ¢ãƒ‡ãƒ«ã®èª­ã¿è¾¼ã¿
+	// ‚R‚cƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
 	m_modelHandle = MV1LoadModel("data/model/cube.mqo");
 	m_modelHandleDir = MV1LoadModel("data/model/dir.mqo");
 
@@ -18,23 +18,23 @@ CubeControll::CubeControll()
 }
 
 //---------------------
-// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+// ƒfƒXƒgƒ‰ƒNƒ^
 //---------------------
 CubeControll::~CubeControll()
 {
-	// ãƒ¢ãƒ‡ãƒ«ã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰.
+	// ƒ‚ƒfƒ‹‚ÌƒAƒ“ƒ[ƒh.
 	MV1DeleteModel(m_modelHandle);
 }
 
 //---------------------
-// åˆæœŸåŒ–
+// ‰Šú‰»
 //---------------------
 void CubeControll::Init()
 {
-	// å„å¤‰æ•°åˆæœŸåŒ–
+	// Še•Ï”‰Šú‰»
 	for (int i = 0; i < 9; i++)
 	{
-		// ã‚­ãƒ¥ãƒ¼ãƒ–ã‚’æ‰€å®šã®ä½ç½®ã«è¨­å®š
+		// ƒLƒ…[ƒu‚ğŠ’è‚ÌˆÊ’u‚Éİ’è
 		m_pos[i] = m_squaresPos[m_nextPosNum[i]];
 		m_isSlide[i] = false;
 		m_isFit[i] = false;
@@ -60,23 +60,23 @@ void CubeControll::Init()
 }
 
 //---------------------
-// æ›´æ–°
+// XV
 //---------------------
 void CubeControll::Update()
 {	
 	int cnt = 0;
 	for (int i = 0; i < 9; i++)
 	{
-		// ç§»å‹•
+		// ˆÚ“®
 		MoveCube(i);
 
-		// èµ¤ã„æ å†…ã«å…¥ã£ãŸã‚‰åã¾ã£ãŸãƒ•ãƒ©ã‚°ã‚’trueã«ã™ã‚‹
+		// Ô‚¢˜g“à‚É“ü‚Á‚½‚çû‚Ü‚Á‚½ƒtƒ‰ƒO‚ğtrue‚É‚·‚é
 		if (m_pos[i].x < 45 && m_pos[i].x > -45 && m_pos[i].z < 45 && m_pos[i].z > -45)
 			m_isFit[i] = true;
 		else
 			m_isFit[i] = false;
 
-		//èµ¤ã„æ å†…ã«å…¨éƒ¨å…¥ã£ãŸã‚‰æ¬¡ã¸é€²ã‚€ãƒ•ãƒ©ã‚°ã‚’trueã«ã™ã‚‹
+		//Ô‚¢˜g“à‚É‘S•”“ü‚Á‚½‚çŸ‚Öi‚Şƒtƒ‰ƒO‚ğtrue‚É‚·‚é
 		if (m_isFit[i])
 			cnt++;
 		if (cnt == 9 && !m_isMove && !m_isAllFit)
@@ -101,15 +101,15 @@ void CubeControll::Update()
 }
 
 //---------------------
-// æç”»
+// •`‰æ
 //---------------------
 void CubeControll::Draw()
 {
 	for (int i = 0; i < 9; i++)
 	{
-		// ï¼“Dãƒ¢ãƒ‡ãƒ«ã®ãƒã‚¸ã‚·ãƒ§ãƒ³è¨­å®š
+		// ‚RDƒ‚ƒfƒ‹‚Ìƒ|ƒWƒVƒ‡ƒ“İ’è
 		MV1SetPosition(m_modelHandle, m_pos[i]);
-		// ï¼“ï¼¤ãƒ¢ãƒ‡ãƒ«ã®æç”»
+		// ‚R‚cƒ‚ƒfƒ‹‚Ì•`‰æ
 		MV1DrawModel(m_modelHandle);
 	}
 
@@ -137,33 +137,15 @@ void CubeControll::Draw()
 }
 
 //---------------------
-// é–¢æ•°ç¾¤
+// ŠÖ”ŒQ
 //---------------------
 
-// æ¬¡ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã¸è¡Œãéš›ã®å¤‰æ›´å‡¦ç†
-void CubeControll::ChangeNextPos(int nextStageNum)
-{
-	printfDx("aaa");
-	for (int i = 0; i < 9; i++)
-	{
-		// ã‚­ãƒ¥ãƒ¼ãƒ–ã‚’æ‰€å®šã®ä½ç½®ã«è¨­å®š
-		m_pos[i] = m_squaresPos[m_nextPosNum[i + (nextStageNum - 1) * 9]];
-		m_isSlide[i] = false;
-		m_isFit[i] = false;
-		m_isHit[i] = false;
-	}
-	m_nowStageNum = nextStageNum;
-	m_isAllFit = false;
-	m_isClear = false;
-	m_waitCnt = 0;
-}
-
-// ç§»å‹•ç®¡ç†å‡¦ç†
+// ˆÚ“®ŠÇ—ˆ—
 void CubeControll::MoveCube(int i)
 {
-	if (GetInput(SHOT) == PUSHDOWN && m_isAbleShot && !m_isSlide[i])
+	if (GetInput(SHOT) == PUSHDOWN && m_isCanShot && !m_isSlide[i])
 	{
-		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã©ã®é¢ã«é¢ã—ã¦ã„ã‚‹ã‹ã«ã‚ˆã£ã¦å‹•ã‹ã™æ–¹å‘ã‚’æ±ºã‚ã‚‹
+		// ƒvƒŒƒCƒ„[‚ª‚Ç‚Ì–Ê‚É–Ê‚µ‚Ä‚¢‚é‚©‚É‚æ‚Á‚Ä“®‚©‚·•ûŒü‚ğŒˆ‚ß‚é
 		const bool moveLeft = m_playerPos.z > m_pos[i].z - m_radius && m_playerPos.z < m_pos[i].z + m_radius &&
 			m_playerPos.x - m_range < m_pos[i].x + m_radius &&
 			m_playerPos.x - m_range > m_pos[i].x - m_radius;
@@ -177,32 +159,32 @@ void CubeControll::MoveCube(int i)
 			m_playerPos.z + m_range > m_pos[i].z - m_radius &&
 			m_playerPos.z + m_range < m_pos[i].z + m_radius;
 
-		if (moveLeft)	// å·¦ã¸å‹•ã‹ã™
+		if (moveLeft)	// ¶‚Ö“®‚©‚·
 		{
 			m_isSlide[i] = true;
 			m_slideVec = VGet(-m_moveSpeed, 0, 0);
 			m_slideDirection = SLIDE_LEFT;
 		}
-		if (moveRight)	// å³ã¸å‹•ã‹ã™
+		if (moveRight)	// ‰E‚Ö“®‚©‚·
 		{
 			m_isSlide[i] = true;
 			m_slideVec = VGet(m_moveSpeed, 0, 0);
 			m_slideDirection = SLIDE_RIGHT;
 		}
-		if (moveBack)	// æ‰‹å‰ã¸å‹•ã‹ã™
+		if (moveBack)	// è‘O‚Ö“®‚©‚·
 		{
 			m_isSlide[i] = true;
 			m_slideVec = VGet(0, 0, -m_moveSpeed);
 			m_slideDirection = SLIDE_BACK;
 		}
-		if (moveFront)	// å¥¥ã¸å‹•ã‹ã™
+		if (moveFront)	// ‰œ‚Ö“®‚©‚·
 		{
 			m_isSlide[i] = true;
 			m_slideVec = VGet(0, 0, m_moveSpeed);
 			m_slideDirection = SLIDE_FRONT;
 		}
 
-		//éš£æ¥ã—ã¦ã„ã‚‹ã‚­ãƒ¥ãƒ¼ãƒ–ãŒã‚ã‚‹ãªã‚‰ã€ãã®ã‚­ãƒ¥ãƒ¼ãƒ–ã®ã‚¹ãƒ©ã‚¤ãƒ‰ãƒ•ãƒ©ã‚°ã‚‚trueã«ã™ã‚‹
+		//—×Ú‚µ‚Ä‚¢‚éƒLƒ…[ƒu‚ª‚ ‚é‚È‚çA‚»‚ÌƒLƒ…[ƒu‚ÌƒXƒ‰ƒCƒhƒtƒ‰ƒO‚àtrue‚É‚·‚é
 		if (m_isSlide[i])
 		{
 			CheckAdjacent(i);
@@ -216,11 +198,11 @@ void CubeControll::MoveCube(int i)
 		m_pos[i] = VAdd(m_pos[i], m_slideVec);
 	}
 
-	// å½“ãŸã‚Šåˆ¤å®š
+	// “–‚½‚è”»’è
 	DetectionCollision(i);
 }
 
-// éš£æ¥ã—ã¦ã„ã‚‹ã‚­ãƒ¥ãƒ¼ãƒ–ãŒã‚ã£ãŸã‚‰ãã‚Œã‚‚å‹•ã‹ã™ã‚ˆã†ã«ã™ã‚‹å‡¦ç†
+// —×Ú‚µ‚Ä‚¢‚éƒLƒ…[ƒu‚ª‚ ‚Á‚½‚ç‚»‚ê‚à“®‚©‚·‚æ‚¤‚É‚·‚éˆ—
 void CubeControll::CheckAdjacent(int i)
 {
 	for (int j = 0; j < 9; j++)
@@ -238,7 +220,6 @@ void CubeControll::CheckAdjacent(int i)
 		}
 	}
 }
-
 
 void CubeControll::ShotSupport()
 {
@@ -282,12 +263,12 @@ void CubeControll::ShotSupport()
 	}
 }
 
-// å½“ãŸã‚Šåˆ¤å®š
+// “–‚½‚è”»’è
 void CubeControll::DetectionCollision(int i)
 {
 	bool hit = false;
 
-	//ãƒã‚¹ç›®ã®ç«¯ã¨ã®åˆ¤å®š
+	//ƒ}ƒX–Ú‚Ì’[‚Æ‚Ì”»’è
 	if (m_pos[i].x < m_sqStartPoint.x || m_pos[i].x > m_sqEndPoint.x ||
 		m_pos[i].z < m_sqEndPoint.z || m_pos[i].z > m_sqStartPoint.z)
 	{
@@ -295,10 +276,10 @@ void CubeControll::DetectionCollision(int i)
 		m_pos[i] = VAdd(m_pos[i], VScale(m_slideVec, -1));
 	}
 
-	//ã‚­ãƒ¥ãƒ¼ãƒ–åŒå£«ã®åˆ¤å®š
+	//ƒLƒ…[ƒu“¯m‚Ì”»’è
 	for (int j = 0; j < 9; j++)
 	{
-		//åŒã˜ã‚­ãƒ¥ãƒ¼ãƒ–ã¯åˆ¤å®šã—ãªã„
+		//“¯‚¶ƒLƒ…[ƒu‚Í”»’è‚µ‚È‚¢
 		if (i == j)
 			j++;
 
@@ -331,7 +312,24 @@ void CubeControll::DetectionCollision(int i)
 	}
 }
 
-// ãƒã‚¹ç›®ã¨ã‹ã®æƒ…å ±ã‚’ã‚»ãƒƒãƒˆã™ã‚‹å‡¦ç†
+void CubeControll::ChangeNextPos(int nextStageNum)
+{
+	printfDx("aaa");
+	for (int i = 0; i < 9; i++)
+	{
+		// ƒLƒ…[ƒu‚ğŠ’è‚ÌˆÊ’u‚Éİ’è
+		m_pos[i] = m_squaresPos[m_nextPosNum[i + (nextStageNum - 1) * 9]];
+		m_isSlide[i] = false;
+		m_isFit[i] = false;
+		m_isHit[i] = false;
+	}
+	m_nowStageNum = nextStageNum;
+	m_isAllFit = false;
+	m_isClear = false;
+	m_waitCnt = 0;
+}
+
+// ƒ}ƒX–Ú‚Æ‚©‚Ìî•ñ‚ğƒZƒbƒg‚·‚éˆ—
 void CubeControll::SetBordInfo()
 {
 	m_squaresPos[0] = VGet(-90, 0, 90);
@@ -424,7 +422,7 @@ void CubeControll::Debug()
 		m_nowStageNum = 1;
 		for (int i = 0; i < 9; i++)
 		{
-			// ã‚­ãƒ¥ãƒ¼ãƒ–ã‚’æ‰€å®šã®ä½ç½®ã«è¨­å®š
+			// ƒLƒ…[ƒu‚ğŠ’è‚ÌˆÊ’u‚Éİ’è
 			m_pos[i] = m_squaresPos[m_nextPosNum[i + (m_nowStageNum - 1) * 9]];
 			m_isSlide[i] = false;
 			m_isFit[i] = false;
@@ -442,7 +440,7 @@ void CubeControll::Debug()
 		m_nowStageNum = 2;
 		for (int i = 0; i < 9; i++)
 		{
-			// ã‚­ãƒ¥ãƒ¼ãƒ–ã‚’æ‰€å®šã®ä½ç½®ã«è¨­å®š
+			// ƒLƒ…[ƒu‚ğŠ’è‚ÌˆÊ’u‚Éİ’è
 			m_pos[i] = m_squaresPos[m_nextPosNum[i + (m_nowStageNum - 1) * 9]];
 			m_isSlide[i] = false;
 			m_isFit[i] = false;
@@ -460,7 +458,7 @@ void CubeControll::Debug()
 		m_nowStageNum = 3;
 		for (int i = 0; i < 9; i++)
 		{
-			// ã‚­ãƒ¥ãƒ¼ãƒ–ã‚’æ‰€å®šã®ä½ç½®ã«è¨­å®š
+			// ƒLƒ…[ƒu‚ğŠ’è‚ÌˆÊ’u‚Éİ’è
 			m_pos[i] = m_squaresPos[m_nextPosNum[i + (m_nowStageNum - 1) * 9]];
 			m_isSlide[i] = false;
 			m_isFit[i] = false;
@@ -478,7 +476,7 @@ void CubeControll::Debug()
 		m_nowStageNum = 4;
 		for (int i = 0; i < 9; i++)
 		{
-			// ã‚­ãƒ¥ãƒ¼ãƒ–ã‚’æ‰€å®šã®ä½ç½®ã«è¨­å®š
+			// ƒLƒ…[ƒu‚ğŠ’è‚ÌˆÊ’u‚Éİ’è
 			m_pos[i] = m_squaresPos[m_nextPosNum[i + (m_nowStageNum - 1) * 9]];
 			m_isSlide[i] = false;
 			m_isFit[i] = false;
@@ -497,7 +495,7 @@ void CubeControll::Debug()
 ;
 		for (int i = 0; i < 9; i++)
 		{
-			// ã‚­ãƒ¥ãƒ¼ãƒ–ã‚’æ‰€å®šã®ä½ç½®ã«è¨­å®š
+			// ƒLƒ…[ƒu‚ğŠ’è‚ÌˆÊ’u‚Éİ’è
 			m_pos[i] = m_squaresPos[m_nextPosNum[i + (m_nowStageNum - 1) * 9]];
 			m_isSlide[i] = false;
 			m_isFit[i] = false;
@@ -515,7 +513,7 @@ void CubeControll::Debug()
 		m_nowStageNum = 6;
 		for (int i = 0; i < 9; i++)
 		{
-			// ã‚­ãƒ¥ãƒ¼ãƒ–ã‚’æ‰€å®šã®ä½ç½®ã«è¨­å®š
+			// ƒLƒ…[ƒu‚ğŠ’è‚ÌˆÊ’u‚Éİ’è
 			m_pos[i] = m_squaresPos[m_nextPosNum[i + (m_nowStageNum - 1) * 9]];
 			m_isSlide[i] = false;
 			m_isFit[i] = false;
@@ -533,7 +531,7 @@ void CubeControll::Debug()
 		m_nowStageNum = 7;
 		for (int i = 0; i < 9; i++)
 		{
-			// ã‚­ãƒ¥ãƒ¼ãƒ–ã‚’æ‰€å®šã®ä½ç½®ã«è¨­å®š
+			// ƒLƒ…[ƒu‚ğŠ’è‚ÌˆÊ’u‚Éİ’è
 			m_pos[i] = m_squaresPos[m_nextPosNum[i + (m_nowStageNum - 1) * 9]];
 			m_isSlide[i] = false;
 			m_isFit[i] = false;
@@ -551,7 +549,7 @@ void CubeControll::Debug()
 		m_nowStageNum = 8;
 		for (int i = 0; i < 9; i++)
 		{
-			// ã‚­ãƒ¥ãƒ¼ãƒ–ã‚’æ‰€å®šã®ä½ç½®ã«è¨­å®š
+			// ƒLƒ…[ƒu‚ğŠ’è‚ÌˆÊ’u‚Éİ’è
 			m_pos[i] = m_squaresPos[m_nextPosNum[i + (m_nowStageNum - 1) * 9]];
 			m_isSlide[i] = false;
 			m_isFit[i] = false;
@@ -569,7 +567,7 @@ void CubeControll::Debug()
 		m_nowStageNum = 9;
 		for (int i = 0; i < 9; i++)
 		{
-			// ã‚­ãƒ¥ãƒ¼ãƒ–ã‚’æ‰€å®šã®ä½ç½®ã«è¨­å®š
+			// ƒLƒ…[ƒu‚ğŠ’è‚ÌˆÊ’u‚Éİ’è
 			m_pos[i] = m_squaresPos[m_nextPosNum[i + (m_nowStageNum - 1) * 9]];
 			m_isSlide[i] = false;
 			m_isFit[i] = false;

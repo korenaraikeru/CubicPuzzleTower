@@ -1,4 +1,4 @@
-ï»¿#include "Shadow.h"
+#include "Shadow.h"
 #include "Title.h"
 #include "Player.h"
 #include "Scaffold.h"
@@ -29,11 +29,11 @@ void Shadow::TitleUpdate(const Title & title)
 
 	angle = title.GetAngle();
 
-	// ï¼“Dãƒ¢ãƒ‡ãƒ«ã®ãƒã‚¸ã‚·ãƒ§ãƒ³è¨­å®š
+	// ‚RDƒ‚ƒfƒ‹‚Ìƒ|ƒWƒVƒ‡ƒ“İ’è
 	MV1SetPosition(modelHandle, pos);
 
 	MV1SetScale(modelHandle, title.GetScale());
-	// ï¼“Dãƒ¢ãƒ‡ãƒ«ã®å›è»¢è§’è¨­å®š
+	// ‚RDƒ‚ƒfƒ‹‚Ì‰ñ“]Špİ’è
 	MV1SetRotationXYZ(modelHandle, VGet(0.0f, angle / 180.0f * DX_PI_F, 0.0f));
 }
 
@@ -46,11 +46,11 @@ void Shadow::Update(const Player& player, const Scaf& scaf)
 
 	angle = player.GetAngle();
 
-	// ï¼“Dãƒ¢ãƒ‡ãƒ«ã®ãƒã‚¸ã‚·ãƒ§ãƒ³è¨­å®š
+	// ‚RDƒ‚ƒfƒ‹‚Ìƒ|ƒWƒVƒ‡ƒ“İ’è
 	MV1SetPosition(modelHandle, pos);
 
 	MV1SetScale(modelHandle, player.GetScale());
-	// ï¼“Dãƒ¢ãƒ‡ãƒ«ã®å›è»¢è§’è¨­å®š
+	// ‚RDƒ‚ƒfƒ‹‚Ì‰ñ“]Špİ’è
 	MV1SetRotationXYZ(modelHandle, VGet(0.0f, angle / 180.0f * DX_PI_F, 0.0f));
 }
 

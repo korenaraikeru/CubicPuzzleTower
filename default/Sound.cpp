@@ -1,12 +1,9 @@
-ï»¿//-----------------------------------------------------------------------------
-// éŸ³é–¢é€£ç®¡ç†é–¢æ•°
-//-----------------------------------------------------------------------------
 #include "Sound.h"
 #include "DxLib.h"
 
 int sound[ALL_NUM];
 
-// èª­ã¿è¾¼ã¿
+// “Ç‚İ‚İ
 void loadSound()
 {
 	sound[BGM_TITLE] = LoadSoundMem("data/sound/title.mp3");
@@ -25,14 +22,14 @@ void loadSound()
 	sound[SE_SCAF] = LoadSoundMem("data/sound/scaf_move.mp3");
 }
 
-// å‰Šé™¤
+// íœ
 void deleteSound()
 {
 	for (int i = 0; i < ALL_NUM; i++)
 		DeleteSoundMem(sound[i]);
 }
 
-// å†ç”Ÿ
+// Ä¶
 void playSound(int sound_name)
 {
 	if (CheckSoundMem(sound[sound_name]) == 0)
@@ -44,7 +41,7 @@ void playSound(int sound_name)
 		PlaySoundMem(sound[sound_name], DX_PLAYTYPE_BACK);
 }
 
-// åœæ­¢
+// ’â~
 void stopSound(int sound_name)
 {
 	if (CheckSoundMem(sound[sound_name]) == 1)
@@ -53,7 +50,7 @@ void stopSound(int sound_name)
 	}
 }
 
-// å†ç”Ÿä½ç½®åˆæœŸåŒ–
+// Ä¶ˆÊ’u‰Šú‰»
 void resetSound(int sound_name)
 {
 	SetCurrentPositionSoundMem(0, sound[sound_name]);

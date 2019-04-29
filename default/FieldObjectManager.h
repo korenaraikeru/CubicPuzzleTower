@@ -1,43 +1,36 @@
-﻿//-----------------------------------------------------------------------------
-// フィールドオブジェクト管理クラス
-//-----------------------------------------------------------------------------
 #pragma once
 #include "DxLib.h"
 
 class FieldObjectManager
 {
 public:
-	FieldObjectManager();	// コンストラクタ
-	~FieldObjectManager();	// デストラクタ
+	FieldObjectManager();
+	~FieldObjectManager();
 
-	//---主要関数-------------------------------------------------------------------
-	void Init();			// 初期化
-	void Update();			// 更新
-	void Draw();			// 描画
-	//-----------------------------------------------------------------------------
+	//---��v�֐�-----------------------------------
+	void Init();
+	void Update();
+	void Draw();
+	//---------------------------------------------
 
-	//---Get関数--------------------------------------------------------------------
-	VECTOR GetFloorPos() { return m_floorPos; }			// 
-	bool GetIsEndRising() { return m_isRisingEnd; }		// 
-	//-----------------------------------------------------------------------------
+	//---Get�֐�-----------------------------------
+	VECTOR GetFloorPos() { return m_floorPos; }
+	bool GetIsEndRising() { return m_isEndRising; }
+	//---------------------------------------------
 
-	//---Set関数---------------------------------------------------------------------
-	void SetIsRising(bool flag) { m_isRising = flag; }	// 
-	//-----------------------------------------------------------------------------
-
+	//---Set�֐�-----------------------------------
+	void SetIsRising(bool flag) { m_isRising = flag; }
+	//---------------------------------------------
 private:
-	void MoveFloor();			// 床の上昇
+	void MoveFloor();
 
-	//---変数群----------------------------------------------------------------------
-	int m_modelHandleFloor;		// 
-	int m_modelHandleTower;		// 
-	int m_modelHandleGrid;		// 
-								// 
-	VECTOR m_floorPos;			// 
-								// 
-	bool m_isRising;			// 
-	bool m_isRisingEnd;			// 
-	//-----------------------------------------------------------------------------
+	int m_modelHandleFloor;
+	int m_modelHandleTower;
+	int m_modelHandleFrame;
 
+	VECTOR m_floorPos;
+
+	bool m_isRising;
+	bool m_isEndRising;
 };
 

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "DxLib.h"
 
 typedef enum SLIDE_DIR
@@ -24,9 +24,8 @@ public:
 	bool GetIsSupport() { return m_isSupport; }
 	bool GetIsClear() { return m_isClear; }
 	void SetPlayerPos(VECTOR v) { m_playerPos = v; }
-	void SetIsAbleShot(bool flag) { m_isAbleShot = flag; }
-
 	void ChangeNextPos(int stageNum);
+	void SetIsCanShot(bool flag) { m_isCanShot = flag; }
 
 private:
 	
@@ -71,7 +70,7 @@ private:
 	bool m_isSlide[9];
 	bool m_isFit[9];
 	bool m_isHit[9];
-	bool m_isAbleShot;
+	bool m_isCanShot;
 	bool m_isMove;
 	bool m_isAllFit;
 	bool m_isSupport;

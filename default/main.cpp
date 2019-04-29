@@ -1,61 +1,64 @@
-ï»¿//-----------------------------------------------------------------------------
-// ãƒ¡ã‚¤ãƒ³å‡¦ç†
+//-----------------------------------------------------------------------------
+// ƒƒCƒ“ˆ—
 //-----------------------------------------------------------------------------
 #include "SceneBase.h"
 #include "FPS.h"
 #include "Define.h"
 
 //-----------------------------------------------------------------------------
-// ãƒ¡ã‚¤ãƒ³é–¢æ•°.
+// ƒƒCƒ“ŠÖ”.
 //-----------------------------------------------------------------------------
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
-	// ï¼¤ï¼¸ãƒ©ã‚¤ãƒ–ãƒ©ãƒªåˆæœŸåŒ–å‡¦ç†
+	// ‚c‚wƒ‰ƒCƒuƒ‰ƒŠ‰Šú‰»ˆ—
 	if (DxLib_Init() == -1)
 	{
-		return -1;	// ã‚¨ãƒ©ãƒ¼ãŒèµ·ããŸã‚‰ç›´ã¡ã«çµ‚äº†
+		return -1;	// ƒGƒ‰[‚ª‹N‚«‚½‚ç’¼‚¿‚ÉI—¹
 	}
 
-	// ç”»é¢ãƒ¢ãƒ¼ãƒ‰ã®ã‚»ãƒƒãƒˆ
+	// ‰æ–Êƒ‚[ƒh‚ÌƒZƒbƒg
 	SetGraphMode(SCREEN_W, SCREEN_H, 16);
 	ChangeWindowMode(FALSE);
 
-	// ã‚·ãƒ¼ãƒ³ãƒ™ãƒ¼ã‚¹ã‚’ç”Ÿæˆ
+	// ƒV[ƒ“ƒx[ƒX‚ð¶¬
 	SceneBase *scene = new SceneBase();
 	
-	// ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆå›ºå®šã‚¯ãƒ©ã‚¹ã‚’ç”Ÿæˆ
+	// ƒtƒŒ[ƒ€ƒŒ[ƒgŒÅ’èƒNƒ‰ƒX‚ð¶¬
 	FPS fps;
 	bool isFixedFPS = true;
 
-	// å„ã‚¯ãƒ©ã‚¹ã®åˆæœŸåŒ–
+	// ŠeƒNƒ‰ƒX‚ð¶¬
+	scene->Create();
+
+	// ŠeƒNƒ‰ƒX‚Ì‰Šú‰»
 	scene->Init();
 
-	// ã‚¨ã‚¹ã‚±ãƒ¼ãƒ—ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã‚‹ã‹ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãŒé–‰ã˜ã‚‰ã‚Œã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—
+	// ƒGƒXƒP[ƒvƒL[‚ª‰Ÿ‚³‚ê‚é‚©ƒEƒCƒ“ƒhƒE‚ª•Â‚¶‚ç‚ê‚é‚Ü‚Åƒ‹[ƒv
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
-		// æ›´æ–°
+		// XV
 		fps.Update();
 		scene->Update();
 
-		// ç”»é¢ã‚’åˆæœŸåŒ–ã™ã‚‹
+		// ‰æ–Ê‚ð‰Šú‰»‚·‚é
 		ClearDrawScreen();
 
-		// æç”»
+		// •`‰æ
 		scene->Draw();
 
-		// è£ç”»é¢ã®å†…å®¹ã‚’è¡¨ç”»é¢ã«åæ˜ ã•ã›ã‚‹
+		// — ‰æ–Ê‚Ì“à—e‚ð•\‰æ–Ê‚É”½‰f‚³‚¹‚é
 		ScreenFlip();
 
 		if (isFixedFPS)
 		{
-			// è¨­å®šã—ãŸãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆã«ãªã‚‹ã‚ˆã†ã«å¾…æ©Ÿ
+			// Ý’è‚µ‚½ƒtƒŒ[ƒ€ƒŒ[ƒg‚É‚È‚é‚æ‚¤‚É‘Ò‹@
 			fps.Wait();
 		}
 	}
 
-	// ï¼¤ï¼¸ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®å¾Œå§‹æœ«
+	// ‚c‚wƒ‰ƒCƒuƒ‰ƒŠ‚ÌŒãŽn––
 	DxLib_End();
 
-	// ã‚½ãƒ•ãƒˆã®çµ‚äº†
+	// ƒ\ƒtƒg‚ÌI—¹
 	return 0;
 }
